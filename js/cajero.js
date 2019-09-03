@@ -1,0 +1,95 @@
+const Cajero = {
+    nuevoCliente: function(nombre, apellido, dni){
+        clienteCobrar = new Cliente(nombre, apellido, dni);
+    },
+    nuevoProducto: function(detalle, cantidad, precio, precioTotal){
+        productoCobrar = new Producto(detalle, cantidad, precio, precioTotal);
+    },
+
+    datosCliente: ["Empresa", "Dirección", "Cuil/Cuit"],
+    datosProducto: ["Articulo:", "Cantidad:", "Precio:"],
+    
+    listadoProductos: [],
+    
+    subtotal:0,
+    nuevoDescuento: 0,
+    cotizacionDolar:39.5,
+
+    sumTotales: function(){
+        var total = this.listadoProductos.sum("productoTotal")
+        return total
+    },
+    
+    calcularIVA: function(i){
+        i = Math.round(i*0.21*100)/100
+        return i
+        
+    }
+
+}
+
+// SUMAR TOTALES
+Array.prototype.sum = function (prop) {
+    var total = 0
+    for ( var i = 0, _len = this.length; i < _len; i++ ) {
+        total += this[i][prop]
+    }
+    return total
+}
+
+// PEDIR DATOS
+function pedirDatos(i, datoString, tipo){
+    switch (tipo) {
+        case 'texto' :
+        i =  pedirDato(i, datoString, tipo);
+        while(i == undefined || i.length == 0){
+            pedirDatoValido(datoString)
+            i = pedirDatos(i, datoString, tipo)
+        } break;
+        
+        case 'numero':
+        i = parseInt(pedirDato(i, datoString, tipo));
+        if(datoString === "dni"){
+            var dniValido = i.toString().length;
+            if(dniValido < 8 || isNaN(i)){
+            pedirDatoValido(datoString)
+            i = pedirDatos(i, datoString, tipo)
+        }} else {
+            if(i === undefined || i <= 0 || isNaN(i)){
+            pedirDatoValido(datoString)
+            i = pedirDatos(i, datoString, tipo)
+        } break;
+
+    }} return i;    
+} 
+
+// VALIDAR DATOS
+function pedirDato(i, datoString, tipo){
+    i = prompt('Por favor, ingrese ' + datoString);
+    console.log("pedi datos", i, datoString,tipo)
+    return i;
+}
+
+function pedirDatoValido(datoString){
+    alert('Por favor, ingrese el ' + datoString + ' valido');
+}
+
+// AGREGAR DESCUENTO
+function aplicarDescuento(){
+   var totalDescuento = pedirDatos(Cajero.nuevoDescuento, 'descuento a aplicar', 'numero' )
+    if(totalDescuento <= Cajero.subtotal){
+        Cajero.nuevoDescuento = totalDescuento;
+        document.getElementById('numDescuento').innerHTML = '$' + totalDescuento;
+        actualizarTotal()
+    } else {
+        alert('No se puede aplicar un descuento mayor al Subtotal')
+    }
+}
+
+// ELIMINAR DESCUENTO
+function eliminarDescuento(){
+    alert('Se borrará el descuento aplicado de: ' + '$' + Cajero.nuevoDescuento)
+    Cajero.nuevoDescuento = 0,
+    document.getElementById('numDescuento').innerHTML = '$' + Cajero.nuevoDescuento;
+    actualizarTotal()
+}

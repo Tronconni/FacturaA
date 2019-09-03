@@ -1,0 +1,144 @@
+.ocultar{
+    display: none;  
+}
+
+body {
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    background-color: #2a333d;
+}
+
+.container{
+    margin-top:5%;
+}
+
+.div-col{
+    padding:2%;
+    float: left;
+}
+
+.div-row{
+    margin-right: 0;
+    margin-left:  0;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.col-cliente{
+    background-color: aliceblue;
+    padding-top:1em;
+    min-height: 10em;
+}
+
+.col-factura{
+    background-color: white;
+    min-height: 10em;
+}
+
+.col-acciones{
+    padding: 1em;
+    
+}
+
+
+.col-totales{
+    background-color: aliceblue; 
+    box-sizing: border-box;
+    padding: 1.5em;
+    float: right;
+}
+
+ul {
+    padding-inline-start: 0;
+    margin-block-start: 1em;
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 1.25rem;
+    border-top-right-radius: .25rem;
+}
+
+.table {
+    width: 100%;
+    margin: 0;
+    color: #212529;
+}
+
+#totalesUS.table{
+    background-color: #99c3d4;
+    color: white;
+}
+
+button {
+    margin-right:15px;
+    margin-bottom:6px; 
+}
+.btn-secondary {
+    color: #fff;
+    background-color: #52a07c;
+    border-color: #24b582;
+}
+
+h3 {
+    color:white;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    text-align: left;
+    line-height: 1.5em;
+}
+
+h4 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 0.8em;
+    margin-bottom: 1.6em;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    font-size: 1.1em;
+}
+
+#totales td {
+    text-align: right;
+    color: darkblue;
+    font-size: 1.2em;
+}
+
+
+#totalesUS td {
+    text-align: right;
+    color: white;
+    font-size: 1.2em;
+}
+
+.datos-cliente{
+    font-size: 1rem;
+    line-height: 0.2rem;
+    color: var(--blue);
+}
+
+@media print {
+    .btn {
+      display: none;
+    }
+    h3 {
+        display: none;
+    }
+    body {
+        background-color: white;
+    }
+    .col-factura{
+        background-color: #fbfcfd;
+    }
+    #totalesUS.table, #totalesUS td{ color:grey;}
+}
+
+@media (max-width: 576px){
+    .container {
+        max-width: 570px;
+    }
+}
